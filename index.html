@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient-Generator</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(to right,#020024 , #2c743b);
+    }
+
+    .btn{
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        color: white;
+        width: 200px;
+        height: 50px;
+        color: black;
+    }
+    
+    #btn1{
+        background-color:#260c1a;
+        color: rgba(255, 255, 255, 0.693);
+        font-size: large;
+
+        
+    }
+    #btn2{
+        background-color: #c5d86d;
+        color: #260c1a;
+        font-size: large;
+    }
+    h3{
+        color: rgba(255, 255, 255, 0.909);
+    }
+    .color{
+        background-color: rgba(240, 248, 255, 0.113);
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        margin-top: 20px;
+        padding: 5px 5px;
+        border-left: 4px solid white;
+        cursor: pointer;
+        font-size: 15px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <button id="btn1" class="btn" >#020024</button>
+        <button id="btn2" class="btn" >#2c743b</button>
+        <h3>Copy Your Code Here</h3>
+        <div class="color">
+            <h4>linear-gradient(to right,#020024 , #2c743b);</h4>
+        </div>
+    </div>
+
+</body>
+<script>
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+    const copycode = document.querySelector('.color');
+
+    const hexaValue=()=>{
+        let hexaNumber = '0123456789abcdef';
+        colors="#";
+        for(let i=0;i<6;i++){
+            colors=colors+hexaNumber[Math.floor(Math.random()*16)];
+        }
+        return colors;
+    }
+    
+    const code=()=>{
+        copycode.innerText=`linear-gradient(to right, ${btn1.innerText},${btn2.innerText})`;
+    }
+
+    const hexNum1=()=>{
+        let rgb1=hexaValue();
+        btn1.innerText=rgb1;
+        document.body.style.background=`linear-gradient(to right, ${rgb1},#fff)`;
+        code();
+        
+    }
+    const hexNum2=()=>{
+        let rgb2=hexaValue();
+        btn2.innerText=rgb2;
+        document.body.style.background=`linear-gradient(to right,${btn1.innerText},${rgb2})`;
+        code();
+
+    }
+
+    btn1.addEventListener('click',()=>{
+        hexNum1();
+    })
+    btn2.addEventListener('click',()=>{
+        hexNum2();
+    })
+    copycode.addEventListener('click',()=>{
+        navigator.clipboard.writeText(copycode.innerText);
+        window.alert('Code Copied!');
+    })
+</script>
+
+</html>
